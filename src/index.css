@@ -29,12 +29,18 @@
     }
   }
   @keyframes pulse-subtitle {
-    0%, 
+    0%,
     100% {
       opacity: 1;
     }
-    50% {
+    75%,{
       opacity: 0.8;
+    }
+    50% {
+      opacity: 0.6;
+    }
+    25% {
+      opacity: 0.4;
     }
   }
   @keyframes fade-in {
@@ -67,6 +73,9 @@
     --background: 210 40% 98%;
     --foreground: 222 47% 11%;
 
+    /* pixel color: default (light mode uses black) */
+    --pixel-bg: #8d8b8b;
+
     --card: 0 0% 100%;
 
     --primary: 250 47% 60%;
@@ -84,6 +93,9 @@
     --primary-foreground: 213 31% 91%;
 
     --border: 217 33% 20%;
+
+    /* pixel color in dark mode */
+    --pixel-bg: #fff;
   }
 
   * {
@@ -96,6 +108,7 @@
   
   body {
     @apply bg-background text-foreground transition-colors duration-300;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
@@ -142,11 +155,19 @@
     hover:scale-105 active:scale-95;
 }
 
-@utility star {
-  @apply abosolute rounded-full bg-white;
-  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.4)
+@utility pixel {
+  @apply absolute w-5 h-5;
+  background: var(--pixel-bg);
+  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.4);
 }
 @utility meteor {
-  @apply abosolute bg-linear-to-r from-white via-white to-transparent rounded-full;
+  @apply absolute bg-linear-to-r from-white via-white to-transparent rounded-full;
   box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3)
+}
+
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
 }
